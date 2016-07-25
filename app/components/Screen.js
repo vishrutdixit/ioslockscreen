@@ -11,42 +11,20 @@ class Screen extends Component {
 		controlledPosition: {x: 0, y:0},
 		translate: 0,
 		duration: 0,
-		useControl: false,
-		showHome: false
+		useControl: false
 	}
 	onStart() {
     //console.log('start')
   }
   onStop = (e, ui) => {
-  	/*
-  	console.log(ui.x >= -155)
-  	if(ui.x < -155) {
-  		for(let i = ui.x; i >= -233; i--){
-  			//console.log(i)
-  			this.setState({
-  				controlledPosition: {x: i, y:0},
-  				deltaPosition: {x:0}
-  			})
-  		}
-  	}
-  	else if(ui.x >= -155) {
-  		console.log("yooo")
-  		for(let i = ui.x; i <= 0; i++){
-  			console.log(i)
-  			this.setState({
-  				controlledPosition: {x: i, y:0},
-  				deltaPosition: {x:0}
-  			})
-  		}
-  	}
-  	*/
   	if(ui.x < 75){
   		console.log(ui.x)
   		
   		this.setState({
   		deltaPosition: {x:0},
   		translate: 0,
-  		duration: 500
+  		duration: 500,
+      controlledPosition: {x: 0, y: 0}
   		})
   		
   	}
@@ -55,19 +33,16 @@ class Screen extends Component {
   		this.setState({
   		deltaPosition: {x:200},
   		translate: 233,
-  		duration: 500
+  		duration: 500,
+      controlledPosition: {x: this.state.controlledPosition.x + ui.deltaX, y: 0}
   		})
   	}
   }
   onDrag = (e, ui) => {
-  	//console.log(ui)
-  	
-  	//console.log(this.state.deltaPosition.x + ui.deltaX)
-
   	this.setState({
   		deltaPosition: {x:this.state.deltaPosition.x + ui.deltaX},
-  		translate: this.state.deltaPosition.x + ui.deltaX
-  		//controlledPosition: {x: this.state.controlledPosition.x + ui.deltaX, y: 0}
+  		translate: this.state.deltaPosition.x + ui.deltaX,
+  		controlledPosition: {x: this.state.controlledPosition.x + ui.deltaX, y: 0}
   	})
   }
 	login = () => {
@@ -80,10 +55,13 @@ class Screen extends Component {
 		//if(opacity > 0.4) opacity = 0.4
 
 		return (
-			this.state.showHome ? <div id="home"></div> 
+			this.state.showHome ? 
+      <VelocityComponent runOnMount={true} animation={{opacity: 1}} duration={750}>
+      <div id="home"></div> 
+      </VelocityComponent>
 			: 
 			<div id="screen">
-				<VelocityComponent animation={{opacity: opacity}} duration={this.state.duration}>
+				<VelocityComponent controlledPosition={this.state.controlledPosition} animation={{opacity: opacity}} duration={this.state.duration}>
 				<div id="overlay"> </div>
 				</VelocityComponent>
 				<div>

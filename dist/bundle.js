@@ -21157,7 +21157,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -21191,126 +21191,105 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var Screen = function (_Component) {
-	  _inherits(Screen, _Component);
+		_inherits(Screen, _Component);
 
-	  function Screen() {
-	    var _Object$getPrototypeO;
+		function Screen() {
+			var _Object$getPrototypeO;
 
-	    var _temp, _this, _ret;
+			var _temp, _this, _ret;
 
-	    _classCallCheck(this, Screen);
+			_classCallCheck(this, Screen);
 
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-	      args[_key] = arguments[_key];
-	    }
+			for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+				args[_key] = arguments[_key];
+			}
 
-	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Screen)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
-	      deltaPosition: { x: 0 },
-	      controlledPosition: { x: 0, y: 0 },
-	      translate: 0,
-	      duration: 0,
-	      useControl: false,
-	      showHome: false
-	    }, _this.onStop = function (e, ui) {
-	      /*
-	      console.log(ui.x >= -155)
-	      if(ui.x < -155) {
-	      	for(let i = ui.x; i >= -233; i--){
-	      		//console.log(i)
-	      		this.setState({
-	      			controlledPosition: {x: i, y:0},
-	      			deltaPosition: {x:0}
-	      		})
-	      	}
-	      }
-	      else if(ui.x >= -155) {
-	      	console.log("yooo")
-	      	for(let i = ui.x; i <= 0; i++){
-	      		console.log(i)
-	      		this.setState({
-	      			controlledPosition: {x: i, y:0},
-	      			deltaPosition: {x:0}
-	      		})
-	      	}
-	      }
-	      */
-	      if (ui.x < 75) {
-	        console.log(ui.x);
+			return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Screen)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+				deltaPosition: { x: 0 },
+				controlledPosition: { x: 0, y: 0 },
+				translate: 0,
+				duration: 0,
+				useControl: false
+			}, _this.onStop = function (e, ui) {
+				if (ui.x < 75) {
+					console.log(ui.x);
 
-	        _this.setState({
-	          deltaPosition: { x: 0 },
-	          translate: 0,
-	          duration: 500
-	        });
-	      }
+					_this.setState({
+						deltaPosition: { x: 0 },
+						translate: 0,
+						duration: 500,
+						controlledPosition: { x: 0, y: 0 }
+					});
+				}
 
-	      if (ui.x >= 75) {
-	        _this.setState({
-	          deltaPosition: { x: 200 },
-	          translate: 233,
-	          duration: 500
-	        });
-	      }
-	    }, _this.onDrag = function (e, ui) {
-	      //console.log(ui)
+				if (ui.x >= 75) {
+					_this.setState({
+						deltaPosition: { x: 200 },
+						translate: 233,
+						duration: 500,
+						controlledPosition: { x: _this.state.controlledPosition.x + ui.deltaX, y: 0 }
+					});
+				}
+			}, _this.onDrag = function (e, ui) {
+				_this.setState({
+					deltaPosition: { x: _this.state.deltaPosition.x + ui.deltaX },
+					translate: _this.state.deltaPosition.x + ui.deltaX,
+					controlledPosition: { x: _this.state.controlledPosition.x + ui.deltaX, y: 0 }
+				});
+			}, _this.login = function () {
+				_this.setState({ showHome: true });
+			}, _this.render = function () {
+				var dragHandlers = { onDrag: _this.onDrag, onStart: _this.onStart, onStop: _this.onStop };
+				var opacity = _this.state.deltaPosition.x / 233 - 0.4;
+				//console.log(opacity)
+				//if(opacity > 0.4) opacity = 0.4
 
-	      //console.log(this.state.deltaPosition.x + ui.deltaX)
+				return _this.state.showHome ? _react2.default.createElement(
+					_velocityReact.VelocityComponent,
+					{ runOnMount: true, animation: { opacity: 1 }, duration: 750 },
+					_react2.default.createElement('div', { id: 'home' })
+				) : _react2.default.createElement(
+					'div',
+					{ id: 'screen' },
+					_react2.default.createElement(
+						_velocityReact.VelocityComponent,
+						{ controlledPosition: _this.state.controlledPosition, animation: { opacity: opacity }, duration: _this.state.duration },
+						_react2.default.createElement(
+							'div',
+							{ id: 'overlay' },
+							' '
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(_Statusbar2.default, null),
+						_react2.default.createElement(
+							_velocityReact.VelocityComponent,
+							{ animation: { translateX: _this.state.translate }, duration: 0 },
+							_react2.default.createElement(
+								_reactDraggable2.default,
+								_extends({ controlledPosition: _this.state.useControl ? _this.state.controlledPosition : _this.state.controlledPosition }, dragHandlers, { defaultPosition: { x: 0, y: 0 }, axis: 'x' }),
+								_react2.default.createElement(
+									'div',
+									{ className: 'draggable' },
+									_react2.default.createElement(_Slideables2.default, { login: _this.login })
+								)
+							)
+						)
+					)
+				);
+			}, _temp), _possibleConstructorReturn(_this, _ret);
+		}
 
-	      _this.setState({
-	        deltaPosition: { x: _this.state.deltaPosition.x + ui.deltaX },
-	        translate: _this.state.deltaPosition.x + ui.deltaX
-	        //controlledPosition: {x: this.state.controlledPosition.x + ui.deltaX, y: 0}
-	      });
-	    }, _this.login = function () {
-	      _this.setState({ showHome: true });
-	    }, _this.render = function () {
-	      var dragHandlers = { onDrag: _this.onDrag, onStart: _this.onStart, onStop: _this.onStop };
-	      var opacity = _this.state.deltaPosition.x / 233 - 0.4;
-	      //console.log(opacity)
-	      //if(opacity > 0.4) opacity = 0.4
+		_createClass(Screen, [{
+			key: 'onStart',
+			value: function onStart() {
+				//console.log('start')
+			}
+		}]);
 
-	      return _this.state.showHome ? _react2.default.createElement('div', { id: 'home' }) : _react2.default.createElement(
-	        'div',
-	        { id: 'screen' },
-	        _react2.default.createElement(
-	          _velocityReact.VelocityComponent,
-	          { animation: { opacity: opacity }, duration: _this.state.duration },
-	          _react2.default.createElement(
-	            'div',
-	            { id: 'overlay' },
-	            ' '
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          null,
-	          _react2.default.createElement(_Statusbar2.default, null),
-	          _react2.default.createElement(
-	            _velocityReact.VelocityComponent,
-	            { animation: { translateX: _this.state.translate }, duration: 0 },
-	            _react2.default.createElement(
-	              _reactDraggable2.default,
-	              _extends({ controlledPosition: _this.state.useControl ? _this.state.controlledPosition : _this.state.controlledPosition }, dragHandlers, { defaultPosition: { x: 0, y: 0 }, axis: 'x' }),
-	              _react2.default.createElement(
-	                'div',
-	                { className: 'draggable' },
-	                _react2.default.createElement(_Slideables2.default, { login: _this.login })
-	              )
-	            )
-	          )
-	        )
-	      );
-	    }, _temp), _possibleConstructorReturn(_this, _ret);
-	  }
-
-	  _createClass(Screen, [{
-	    key: 'onStart',
-	    value: function onStart() {
-	      //console.log('start')
-	    }
-	  }]);
-
-	  return Screen;
+		return Screen;
 	}(_react.Component);
 
 	exports.default = Screen;

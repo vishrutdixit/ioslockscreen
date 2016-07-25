@@ -37,7 +37,7 @@ body {
   /*background-color: black;*/
   background-image: url("../img/homescreen.jpg");
   background-size: contain;
-  opacity: 1;
+  opacity: 0;
 }
 
 #overlay {
