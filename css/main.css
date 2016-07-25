@@ -37,7 +37,7 @@ body {
   /*background-color: black;*/
   background-image: url("../img/homescreen.jpg");
   background-size: contain;
-  opacity: 0;
+  opacity: 0.4;
 }
 
 #overlay {
@@ -85,6 +85,15 @@ body {
 
 .artwork-container {
 	height: 200px;
+	width: 200px;
+	margin: 0 auto;
+}
+
+.artwork {
+	border: 1px solid grey;
+	height: 180px;
+	width: 180px;
+	margin: 0 auto;
 }
 
 #slider {
@@ -121,15 +130,29 @@ body {
 }
 
 .lock-circle {
-	margin: 5px 7px;
+	margin: 3px 7px;
 }
 
 .bubbles {
 	padding: 5px;
 }
 
+.numpad-controls {
+	padding-top:10px;
+}
+
 .numpad {
 	padding-top: 20px;
+}
+
+.emergency {
+	margin-left: 10px;
+	float: left;
+}
+
+.delete {
+	float: right;
+	margin-right: 10px;
 }
 
 .noselect {

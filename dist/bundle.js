@@ -21157,12 +21157,10 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	  value: true
 	});
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
 
@@ -21191,105 +21189,100 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var Screen = function (_Component) {
-		_inherits(Screen, _Component);
+	  _inherits(Screen, _Component);
 
-		function Screen() {
-			var _Object$getPrototypeO;
+	  function Screen() {
+	    var _Object$getPrototypeO;
 
-			var _temp, _this, _ret;
+	    var _temp, _this, _ret;
 
-			_classCallCheck(this, Screen);
+	    _classCallCheck(this, Screen);
 
-			for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-				args[_key] = arguments[_key];
-			}
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
+	    }
 
-			return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Screen)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
-				deltaPosition: { x: 0 },
-				controlledPosition: { x: 0, y: 0 },
-				translate: 0,
-				duration: 0,
-				useControl: false
-			}, _this.onStop = function (e, ui) {
-				if (ui.x < 75) {
-					console.log(ui.x);
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Screen)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+	      deltaPosition: { x: 0 },
+	      controlledPosition: { x: 0, y: 0 },
+	      translate: 0,
+	      duration: 0,
+	      useControl: true
+	    }, _this.onStart = function () {
+	      _this.setState({ duration: 0 });
+	    }, _this.onStop = function (e, ui) {
+	      if (ui.x < 75) {
+	        console.log(ui.x);
+	        _this.setState({
+	          deltaPosition: { x: 0 },
+	          translate: 0,
+	          duration: 500
+	        }, function () {
+	          _this.setState({ controlledPosition: { x: 0, y: 0 } });
+	          console.log('okok');
+	        });
+	      }
 
-					_this.setState({
-						deltaPosition: { x: 0 },
-						translate: 0,
-						duration: 500,
-						controlledPosition: { x: 0, y: 0 }
-					});
-				}
+	      if (ui.x >= 75) {
+	        _this.setState({
+	          deltaPosition: { x: 200 },
+	          translate: 233,
+	          duration: 500
+	        }, function () {
+	          _this.setState({ controlledPosition: { x: 0, y: 0 } });
+	        });
+	      }
+	    }, _this.onDrag = function (e, ui) {
+	      _this.setState({
+	        deltaPosition: { x: _this.state.deltaPosition.x + ui.deltaX },
+	        translate: _this.state.deltaPosition.x + ui.deltaX,
+	        controlledPosition: { x: _this.state.controlledPosition.x + ui.deltaX, y: 0 }
+	      });
+	    }, _this.render = function () {
+	      var dragHandlers = { onDrag: _this.onDrag, onStart: _this.onStart, onStop: _this.onStop };
+	      var opacity = _this.state.deltaPosition.x / 233 - 0.4;
+	      //console.log(opacity)
+	      //if(opacity > 0.4) opacity = 0.4
 
-				if (ui.x >= 75) {
-					_this.setState({
-						deltaPosition: { x: 200 },
-						translate: 233,
-						duration: 500,
-						controlledPosition: { x: _this.state.controlledPosition.x + ui.deltaX, y: 0 }
-					});
-				}
-			}, _this.onDrag = function (e, ui) {
-				_this.setState({
-					deltaPosition: { x: _this.state.deltaPosition.x + ui.deltaX },
-					translate: _this.state.deltaPosition.x + ui.deltaX,
-					controlledPosition: { x: _this.state.controlledPosition.x + ui.deltaX, y: 0 }
-				});
-			}, _this.login = function () {
-				_this.setState({ showHome: true });
-			}, _this.render = function () {
-				var dragHandlers = { onDrag: _this.onDrag, onStart: _this.onStart, onStop: _this.onStop };
-				var opacity = _this.state.deltaPosition.x / 233 - 0.4;
-				//console.log(opacity)
-				//if(opacity > 0.4) opacity = 0.4
+	      return _this.state.showHome ? _react2.default.createElement(
+	        _velocityReact.VelocityComponent,
+	        { runOnMount: true, animation: { opacity: 1 }, duration: 750 },
+	        _react2.default.createElement('div', { id: 'home' })
+	      ) : _react2.default.createElement(
+	        'div',
+	        { id: 'screen' },
+	        _react2.default.createElement(
+	          _velocityReact.VelocityComponent,
+	          { animation: { opacity: opacity }, duration: 0 },
+	          _react2.default.createElement(
+	            'div',
+	            { id: 'overlay' },
+	            ' '
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(_Statusbar2.default, null),
+	          _react2.default.createElement(
+	            _velocityReact.VelocityComponent,
+	            { animation: { translateX: _this.state.translate }, duration: _this.state.duration },
+	            _react2.default.createElement(
+	              _reactDraggable2.default,
+	              _extends({ controlledPosition: _this.state.useControl ? _this.state.controlledPosition : null }, dragHandlers, { defaultPosition: { x: 0, y: 0 }, axis: 'x' }),
+	              _react2.default.createElement(
+	                'div',
+	                { className: 'draggable' },
+	                _react2.default.createElement(_Slideables2.default, { login: _this.login })
+	              )
+	            )
+	          )
+	        )
+	      );
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	  }
 
-				return _this.state.showHome ? _react2.default.createElement(
-					_velocityReact.VelocityComponent,
-					{ runOnMount: true, animation: { opacity: 1 }, duration: 750 },
-					_react2.default.createElement('div', { id: 'home' })
-				) : _react2.default.createElement(
-					'div',
-					{ id: 'screen' },
-					_react2.default.createElement(
-						_velocityReact.VelocityComponent,
-						{ controlledPosition: _this.state.controlledPosition, animation: { opacity: opacity }, duration: _this.state.duration },
-						_react2.default.createElement(
-							'div',
-							{ id: 'overlay' },
-							' '
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						null,
-						_react2.default.createElement(_Statusbar2.default, null),
-						_react2.default.createElement(
-							_velocityReact.VelocityComponent,
-							{ animation: { translateX: _this.state.translate }, duration: 0 },
-							_react2.default.createElement(
-								_reactDraggable2.default,
-								_extends({ controlledPosition: _this.state.useControl ? _this.state.controlledPosition : _this.state.controlledPosition }, dragHandlers, { defaultPosition: { x: 0, y: 0 }, axis: 'x' }),
-								_react2.default.createElement(
-									'div',
-									{ className: 'draggable' },
-									_react2.default.createElement(_Slideables2.default, { login: _this.login })
-								)
-							)
-						)
-					)
-				);
-			}, _temp), _possibleConstructorReturn(_this, _ret);
-		}
-
-		_createClass(Screen, [{
-			key: 'onStart',
-			value: function onStart() {
-				//console.log('start')
-			}
-		}]);
-
-		return Screen;
+	  return Screen;
 	}(_react.Component);
 
 	exports.default = Screen;
@@ -21341,7 +21334,7 @@
 						_react2.default.createElement(
 							"span",
 							{ className: "connection-indicator" },
-							"  "
+							" T-Mobile "
 						),
 						" "
 					)
@@ -21460,6 +21453,10 @@
 	var _Clock = __webpack_require__(177);
 
 	var _Clock2 = _interopRequireDefault(_Clock);
+
+	var _Music = __webpack_require__(266);
+
+	var _Music2 = _interopRequireDefault(_Music);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21592,11 +21589,20 @@
 				args[_key] = arguments[_key];
 			}
 
-			return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(ArtworkContainer)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.render = function () {
+			return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(ArtworkContainer)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+				img: ""
+			}, _this.componentWillMount = function () {
+				//get call to axios
+				//set as state
+			}, _this.render = function () {
 				return _react2.default.createElement(
 					"div",
 					{ className: "artwork-container" },
-					" "
+					_react2.default.createElement(
+						"div",
+						{ className: "artwork" },
+						_react2.default.createElement("img", { src: "https://source.unsplash.com/random/180x180" })
+					)
 				);
 			}, _temp), _possibleConstructorReturn(_this, _ret);
 		}
@@ -21700,6 +21706,16 @@
 				row2: [false, false, false],
 				row3: [false, false, false],
 				row4: false
+			}, _this.delete = function () {
+				var arr = _this.state.filled;
+				for (var i = arr.length - 1; i >= 0; i--) {
+					if (arr[i] == true) {
+						arr[i] = false;
+						break;
+					}
+				}
+				_this.count--;
+				_this.setState({ filled: arr });
 			}, _this.mouseUp = function (id) {
 				_this.toggleFill(id);
 				_this.setState({ filled: _this.state.filled.map(function (bool, index) {
@@ -21707,6 +21723,7 @@
 					}) });
 				_this.count++;
 				if (_this.count == 4) {
+					_this.count = 0;
 					_this.props.login();
 				}
 			}, _this.render = function () {
@@ -21815,6 +21832,23 @@
 									" 0 "
 								)
 							)
+						)
+					),
+					_react2.default.createElement(
+						"div",
+						{ className: "numpad-controls" },
+						_react2.default.createElement(
+							"span",
+							{ className: "emergency" },
+							" Emergency "
+						),
+						_react2.default.createElement(
+							"span",
+							{ onClick: _this.delete, className: "delete" },
+							" ",
+							_this.state.filled.filter(function (bool) {
+								return bool == true;
+							}).length == 0 ? 'Cancel' : 'Delete'
 						)
 					)
 				);
@@ -30975,6 +31009,55 @@
 	});
 	;
 	//# sourceMappingURL=react-draggable.js.map
+
+/***/ },
+/* 266 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Music = function (_Component) {
+		_inherits(Music, _Component);
+
+		function Music() {
+			_classCallCheck(this, Music);
+
+			return _possibleConstructorReturn(this, Object.getPrototypeOf(Music).apply(this, arguments));
+		}
+
+		_createClass(Music, [{
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					null,
+					' music '
+				);
+			}
+		}]);
+
+		return Music;
+	}(_react.Component);
+
+	exports.default = Music;
 
 /***/ }
 /******/ ]);

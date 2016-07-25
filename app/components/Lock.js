@@ -9,6 +9,17 @@ class Lock extends Component {
 		row3: [false, false, false],
 		row4: false
 	}
+	delete = () => {
+		let arr = this.state.filled
+		for(let i = arr.length-1; i >= 0; i--){
+			if (arr[i]==true) {
+				arr[i]=false
+				break
+			}
+		}
+		this.count--;
+		this.setState({filled: arr})
+	}
 	mouseUp = (id) => {
 		this.toggleFill(id);
 		this.setState({filled: this.state.filled.map((bool, index)=>{
@@ -19,6 +30,7 @@ class Lock extends Component {
 		})})
 		this.count++;
 		if(this.count == 4) {
+			this.count = 0
 			this.props.login();
 		}
 	}
@@ -103,7 +115,10 @@ class Lock extends Component {
 	  		<text x="50%" y="50%" textAnchor="middle" stroke="#fafafa" strokeWidth="1px" dy=".3em"> 0 </text>
 				</svg>
 			</div>
-			 
+			</div>
+			<div className="numpad-controls">
+				<span className="emergency"> Emergency </span>
+				<span onClick={this.delete} className="delete"> { this.state.filled.filter((bool)=>{ return bool == true }).length == 0 ? 'Cancel' : 'Delete' }</span> 
 			</div>
 
 		</div>
