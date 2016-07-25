@@ -28,6 +28,18 @@ body {
   /* -- */
 }
 
+#home {
+	margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  height: 414px;
+  width: 233px;
+  /*background-color: black;*/
+  background-image: url("../img/homescreen.jpg");
+  background-size: contain;
+  opacity: 1;
+}
+
 #overlay {
 	position: absolute;
 	height: 414px;
@@ -81,6 +93,8 @@ body {
 
 .draggable {
 	cursor: pointer;
+	position: relative;
+	right: 233px;
 }
 
 .draggable-container {

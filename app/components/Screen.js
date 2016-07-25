@@ -8,7 +8,11 @@ import Draggable from 'react-draggable';
 class Screen extends Component {
 	state = {
 		deltaPosition: {x: 0}, 
-		controlledPosition: {x: -233, y:0}
+		controlledPosition: {x: 0, y:0},
+		translate: 0,
+		duration: 0,
+		useControl: false,
+		showHome: false
 	}
 	onStart() {
     //console.log('start')
@@ -36,33 +40,64 @@ class Screen extends Component {
   		}
   	}
   	*/
+  	if(ui.x < 75){
+  		console.log(ui.x)
+  		
+  		this.setState({
+  		deltaPosition: {x:0},
+  		translate: 0,
+  		duration: 500
+  		})
+  		
+  	}
+
+  	if(ui.x >= 75) {
+  		this.setState({
+  		deltaPosition: {x:200},
+  		translate: 233,
+  		duration: 500
+  		})
+  	}
   }
   onDrag = (e, ui) => {
+  	//console.log(ui)
+  	
+  	//console.log(this.state.deltaPosition.x + ui.deltaX)
+
   	this.setState({
   		deltaPosition: {x:this.state.deltaPosition.x + ui.deltaX},
-  		controlledPosition: {x: this.state.controlledPosition.x + ui.deltaX, y: 0}
+  		translate: this.state.deltaPosition.x + ui.deltaX
+  		//controlledPosition: {x: this.state.controlledPosition.x + ui.deltaX, y: 0}
   	})
   }
+	login = () => {
+		this.setState({showHome: true})
+	}
 	render = () => {
 		const dragHandlers = {onDrag: this.onDrag, onStart: this.onStart, onStop: this.onStop}
-		let opacity = this.state.deltaPosition.x/233 - 0.2
+		let opacity = this.state.deltaPosition.x/233 - 0.4
 		//console.log(opacity)
-		if(opacity > 0.4) opacity = 0.4
+		//if(opacity > 0.4) opacity = 0.4
 
 		return (
-			<div id="screen"> 
-				<VelocityComponent animation={{opacity: opacity}} duration={0}>
+			this.state.showHome ? <div id="home"></div> 
+			: 
+			<div id="screen">
+				<VelocityComponent animation={{opacity: opacity}} duration={this.state.duration}>
 				<div id="overlay"> </div>
 				</VelocityComponent>
 				<div>
 					<Statusbar />
-					<Draggable position={this.state.controlledPosition} axis="x" {...dragHandlers}>
+					<VelocityComponent animation={{translateX: this.state.translate}} duration={0}>
+					<Draggable controlledPosition={ this.state.useControl ?  this.state.controlledPosition : this.state.controlledPosition} {...dragHandlers} defaultPosition={{x: 0, y: 0}} axis="x">
 						<div className="draggable">
-						<Slidables />
+						<Slidables login={this.login}/>
 						</div>
 					</Draggable>
+					</VelocityComponent>
 				</div>
 			</div>
+			
 		)
 	}
 }

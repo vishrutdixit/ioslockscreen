@@ -18,6 +18,9 @@ class Lock extends Component {
 				return bool
 		})})
 		this.count++;
+		if(this.count == 4) {
+			this.props.login();
+		}
 	}
 	mouseDown(id) {
 		this.toggleFill(id);
