@@ -1,0 +1,129 @@
+html {
+  -webkit-font-smoothing: antialiased;
+  font-weight: 500;
+}
+
+body {
+   font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial;
+}
+
+#frame {
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  height: 600px;
+  width: 307.15px;
+}
+
+#screen {
+	margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  height: 414px;
+  width: 233px;
+  /*background-color: black;*/
+  background-image: url("../img/wallpaper5.png");
+  background-size: contain;
+  overflow: hidden;
+  /* -- */
+}
+
+#overlay {
+	position: absolute;
+	height: 414px;
+	width: 233px;
+	background-color: black;
+	opacity: 0;
+}
+
+
+.statusbar {
+	background-color: transparent;
+	height: 18px;
+	padding: 0 5px;
+}
+
+.connection-indicator {
+	font-size: 10pt;
+	line-height: 18px;
+	color: white;
+}
+
+#clock {
+	position: relative;
+	opacity: 1;
+	height: 100%;
+	color: #fafafa;
+	text-align: center;
+}
+
+#time {
+	font-size: 45pt;
+	line-height: 60px;
+}
+
+#date {
+	font-size: 10pt;
+}
+
+.content-container {
+	padding-top: 20px;
+	height: 100px;
+}
+
+.artwork-container {
+	height: 200px;
+}
+
+#slider {
+	text-align: center;
+}
+
+.draggable {
+	cursor: pointer;
+}
+
+.draggable-container {
+	display: inline-block;
+	width: 466px;
+	padding-right: 200px;
+}
+
+.passwordscreen {
+	width:233px;
+	float: left;
+}
+
+.lockscreen {
+	width: 233px;
+	float: right;
+}
+
+#lock-indicator {
+	color: white;
+	text-align: center;
+	padding-top: 35px;
+	font-size: 10pt;
+}
+
+.lock-circle {
+	margin: 5px 7px;
+}
+
+.bubbles {
+	padding: 5px;
+}
+
+.numpad {
+	padding-top: 20px;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Non-prefixed version, currently
+                                  not supported by any browser */
+}
