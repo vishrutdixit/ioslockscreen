@@ -46,6 +46,9 @@ class Screen extends Component {
   	  controlledPosition: {x: this.state.controlledPosition.x + ui.deltaX, y: 0}
   	})
   }
+  login = () => {
+  	this.setState({showHome: true})
+  }
 	render = () => {
 		const dragHandlers = {onDrag: this.onDrag, onStart: this.onStart, onStop: this.onStop}
 		let opacity = this.state.deltaPosition.x/233 - 0.4

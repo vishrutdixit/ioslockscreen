@@ -1,11 +1,12 @@
 html {
-  -webkit-font-smoothing: antialiased;
+  /*-webkit-font-smoothing: antialiased;*/
   font-weight: 500;
 }
 
 body {
    font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial;
 }
+
 
 #frame {
   margin: auto;
@@ -28,6 +29,40 @@ body {
   /* -- */
 }
 
+#progress-bar {
+	width: 150px;
+	height:3px;
+	background-color: black;
+	opacity: 0.5;
+	margin: 0 auto;
+}
+
+#track-info {
+	padding-top: 10px;
+	text-align: center;
+
+}
+.track-name {
+	color: white;
+	font-size: 14pt;
+}
+
+.track-artist {
+	color: black;
+	font-size: 8pt;
+}
+
+#music-controls {
+	padding-top: 10px;
+	padding-left: 55px;
+	padding-bottom: 40px;
+}
+
+#control-icon {
+	margin: 0 5px;
+}
+
+
 #home {
 	margin: auto;
   position: absolute;
@@ -48,11 +83,28 @@ body {
 	opacity: 0;
 }
 
+#wifi {
+	position: relative;
+	top: 2px;
+	left: 1px;
+}
+
+#battery {
+	position: relative;
+	top: 2px;
+}
 
 .statusbar {
 	background-color: transparent;
 	height: 18px;
 	padding: 0 5px;
+}
+
+.battery-text {
+	padding-left: 100px;
+	font-size: 10pt;
+	line-height: 18px;
+	color: white;
 }
 
 .connection-indicator {
@@ -94,9 +146,11 @@ body {
 	height: 180px;
 	width: 180px;
 	margin: 0 auto;
+	pointer-events: none;
 }
 
 #slider {
+	margin-top: 230px;
 	text-align: center;
 }
 

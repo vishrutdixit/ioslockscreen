@@ -6,7 +6,7 @@ class ContentContainer extends Component {
 	
 	render = () => (
 		<div className="content-container">
-		<Clock />
+		<Music />
 		</div>
 	)
 }
