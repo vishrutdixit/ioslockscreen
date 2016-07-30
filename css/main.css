@@ -7,6 +7,37 @@ body {
    font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial;
 }
 
+#camera {
+	position: absolute;
+  height: 414px;
+  width: 234px;
+  background-image: url("../img/camera.jpg");
+  background-size: contain;
+  z-index: 0;
+}
+
+#lockscreen {
+	position: absolute;
+	height: 414px;
+  width: 234px;
+  background-image: url("../img/blurred-background.png");
+  background-size: contain;
+  z-index: 1;
+  
+}
+
+#notifications {
+	position: absolute;
+  height: 414px;
+  width: 234px;
+  height: 414px;
+  width: 234px;
+  background-image: url("../img/notifications.jpg");
+  background-size: contain;
+  z-index: 2;
+}
+
+
 
 #frame {
   margin: auto;
@@ -23,7 +54,7 @@ body {
   height: 414px;
   width: 233px;
   /*background-color: black;*/
-  background-image: url("../img/wallpaper5.png");
+  /*background-image: url("../img/blurred-background.png");*/	
   background-size: contain;
   overflow: hidden;
   /* -- */
@@ -91,7 +122,7 @@ body {
 
 #battery {
 	position: relative;
-	top: 2px;
+	top: 4px;
 }
 
 .statusbar {
@@ -101,14 +132,14 @@ body {
 }
 
 .battery-text {
-	padding-left: 100px;
-	font-size: 10pt;
+	padding-left: 125px;
+	font-size: 8pt;
 	line-height: 18px;
 	color: white;
 }
 
 .connection-indicator {
-	font-size: 10pt;
+	font-size: 8pt;
 	line-height: 18px;
 	color: white;
 }
@@ -135,17 +166,12 @@ body {
 	height: 100px;
 }
 
-.artwork-container {
-	height: 200px;
-	width: 200px;
-	margin: 0 auto;
-}
-
 .artwork {
-	border: 1px solid grey;
-	height: 180px;
-	width: 180px;
-	margin: 0 auto;
+	height: 225px;
+	width: 225px;
+	position: relative;
+	left:15px;
+	bottom:25px;
 	pointer-events: none;
 }
 
@@ -154,16 +180,27 @@ body {
 	text-align: center;
 }
 
-.draggable {
-	cursor: pointer;
-	position: relative;
-	right: 233px;
-}
 
 .draggable-container {
 	display: inline-block;
 	width: 466px;
-	padding-right: 200px;
+	cursor: pointer;
+	position: absolute;
+	left: -233px;
+}
+
+#pos1 {
+	transition-property: left;
+  transition-duration: 0.25s;
+  transition-timing-function: ease-out;
+  left: 0px;
+}
+
+#pos0 {
+	transition-property: left;
+  transition-duration: 0.25s;
+  transition-timing-function: ease-out;
+  left: -233px;
 }
 
 .passwordscreen {
@@ -218,3 +255,14 @@ body {
   user-select: none;           /* Non-prefixed version, currently
                                   not supported by any browser */
 }
+
+/*
+.drag-test {
+	background-color: #cca;
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	left: 0;
+}
+*/
+

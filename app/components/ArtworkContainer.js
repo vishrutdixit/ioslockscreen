@@ -3,8 +3,8 @@ import React, { Component } from 'react'
 
 class ArtworkContainer extends Component {
 	state = {
-		img: "https://source.unsplash.com/random/180x180",
-		_img: "https://source.unsplash.com/random/179x179"
+		img: "https://source.unsplash.com/random/200x200",
+		_img: "https://source.unsplash.com/random/199x199"
 	}
 	render = () => (
 		<div className="artwork-container"> 
