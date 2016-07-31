@@ -15,4 +15,4 @@ Changes:
 
 ------
 
-[[https://github.com/vishrutdixit/ioslockscreen/blob/master/ioslockscreen.gif|alt=demo]]
+
