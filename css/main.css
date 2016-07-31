@@ -16,7 +16,7 @@ body {
   z-index: 0;
 }
 
-#lockscreen {
+.lockscreen {
 	position: absolute;
 	height: 414px;
   width: 234px;
@@ -36,8 +36,6 @@ body {
   background-size: contain;
   z-index: 2;
 }
-
-
 
 #frame {
   margin: auto;
@@ -85,7 +83,7 @@ body {
 
 #music-controls {
 	padding-top: 10px;
-	padding-left: 55px;
+	padding-left: 58px;
 	padding-bottom: 40px;
 }
 
@@ -93,6 +91,12 @@ body {
 	margin: 0 5px;
 }
 
+#camera-icon {
+	position: relative;
+	top: 2px;
+	right: 3px;
+	float: right;
+}
 
 #home {
 	margin: auto;
@@ -103,7 +107,7 @@ body {
   /*background-color: black;*/
   background-image: url("../img/homescreen.jpg");
   background-size: contain;
-  opacity: 0.4;
+  opacity: 1;
 }
 
 #overlay {
@@ -166,9 +170,18 @@ body {
 	height: 100px;
 }
 
+.album-cover {
+	position: absolute;
+	z-index: 0;
+}
+
+#current-album-cover {
+	z-index: 5;
+}
+
 .artwork {
-	height: 225px;
-	width: 225px;
+	height: 200px;
+	width: 200px;
 	position: relative;
 	left:15px;
 	bottom:25px;
@@ -187,28 +200,46 @@ body {
 	cursor: pointer;
 	position: absolute;
 	left: -233px;
+	/* -- */
+	padding-bottom: 10px;
 }
 
-#pos1 {
-	transition-property: left;
-  transition-duration: 0.25s;
-  transition-timing-function: ease-out;
-  left: 0px;
-}
-
+/* music screen (x-axis) */ 
 #pos0 {
 	transition-property: left;
   transition-duration: 0.25s;
   transition-timing-function: ease-out;
   left: -233px;
 }
+/* lockscreen */
+#pos1 {
+	transition-property: left;
+  transition-duration: 0.25s;
+  transition-timing-function: ease-out;
+  left: 0px;
+}
+/* music screen (y-axis) */
+#pos2 {
+	transition-property: top;
+  transition-duration: 0.25s;
+  transition-timing-function: ease-out;
+  top: 0px;
+}
+/* camera */ 
+#pos3 {
+	transition-property: top;
+  transition-duration: 0.25s;
+  transition-timing-function: ease-out;
+  top: -414px;
+}
+
 
 .passwordscreen {
 	width:233px;
 	float: left;
 }
 
-.lockscreen {
+._lockscreen {
 	width: 233px;
 	float: right;
 }
@@ -256,13 +287,7 @@ body {
                                   not supported by any browser */
 }
 
-/*
-.drag-test {
-	background-color: #cca;
-	width: 100px;
-	height: 100px;
-	position: absolute;
-	left: 0;
+.card {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
-*/
-

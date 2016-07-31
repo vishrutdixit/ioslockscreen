@@ -77,7 +77,7 @@ class Music extends Component {
 					<img onClick={this.next} id="control-icon" height="30px"src='img/forward.png'/>
 				</div>
 
-				<ArtworkContainer trigger={this.state.trigger}/>
+				<ArtworkContainer curr={this.state.currentTrack} trigger={this.state.trigger}/>
 
 			</div>
 		)

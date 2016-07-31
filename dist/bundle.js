@@ -29190,98 +29190,171 @@
 			}
 
 			return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Lockscreen)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
-				dragging: false,
-				pos: { x: -233 },
+				draggingX: false,
+				draggingY: false,
+				pos: { x: -233, y: 0 },
 				rel: null,
 				class: null,
-				lock: false
+				classY: null,
+				lock: false,
+				camera: false,
+				loggedIn: false
 			}, _this.componentDidUpdate = function (props, state) {
-				if (_this.state.dragging && !state.dragging) {
+				if (_this.state.draggingX && !state.draggingX || _this.state.draggingY && !state.draggingY) {
 					document.addEventListener('mousemove', _this.handleDrag);
 					document.addEventListener('mouseup', _this.handleUp);
-				} else if (!_this.state.dragging && state.dragging) {
+				} else if (!_this.state.draggingX && state.draggingX || !_this.state.draggingY && state.draggingY) {
 					document.removeEventListener('mousemove', _this.handleDrag);
 					document.removeEventListener('mouseup', _this.handleUp);
 				}
-			}, _this.handleDown = function (e) {
-				//console.log(e)
+			}, _this.handleDownX = function (e) {
 				if (e.button !== 0) return;
 				var pos = (0, _jquery2.default)(".draggable-container").offset();
-				console.log(e.pageX - pos.left);
 				_this.setState({
-					dragging: true,
+					draggingX: true,
 					rel: {
-						x: e.pageX
+						x: e.pageX,
+						y: 0
 					},
 					class: null
 				});
 				e.stopPropagation();
 				e.preventDefault();
-			}, _this.handleDrag = function (e) {
-				if (!_this.state.dragging) return;
-				console.log('e.pageX: ' + e.pageX);
-				console.log('this.state.rel.x: ' + _this.state.rel.x);
-				console.log('difference: ' + (e.pageX - _this.state.rel.x));
+			}, _this.handleDownY = function (e) {
+				if (e.button != 0) return;
 				_this.setState({
-					pos: {
-						x: _this.state.lock ? 0 + (e.pageX - _this.state.rel.x) : -233 + e.pageX - _this.state.rel.x
-					}
+					draggingY: true,
+					rel: {
+						y: e.pageY
+					},
+					classY: null
 				});
+				e.stopPropagation();
+				e.preventDefault();
+			}, _this.handleDrag = function (e) {
+				if (!_this.state.draggingX && !_this.state.draggingY) return;
+
+				//dragging along x axis
+				if (_this.state.draggingX) {
+					_this.setState({
+						pos: {
+							x: _this.state.lock ? 0 + (e.pageX - _this.state.rel.x) : -233 + e.pageX - _this.state.rel.x
+						}
+					});
+				}
+
+				//dragging along y axis
+				if (_this.state.draggingY) {
+					//prevent moving downwards
+					var move = e.pageY - _this.state.rel.y > 0;
+					_this.setState({
+						pos: {
+							y: move ? 0 : e.pageY - _this.state.rel.y
+						}
+					});
+				}
 
 				e.stopPropagation();
 				e.preventDefault();
 			}, _this.handleUp = function (e) {
-				//failed
-				if (_this.state.pos.x <= -170) {
-					_this.setState({
-						dragging: false,
-						pos: {
-							x: -233
-						},
-						class: 'pos0',
-						lock: false
-					});
-				}
-				//success
-				else {
+				if (_this.state.draggingX) {
+					//failed
+					if (_this.state.pos.x <= -170) {
 						_this.setState({
-							dragging: false,
+							draggingX: false,
 							pos: {
-								x: 0
+								x: -233
 							},
-							class: 'pos1',
-							lock: true
+							class: 'pos0',
+							lock: false
 						});
 					}
+					//success
+					else {
+							_this.setState({
+								draggingX: false,
+								pos: {
+									x: 0
+								},
+								class: 'pos1',
+								lock: true
+							});
+						}
+				} else if (_this.state.draggingY) {
+					//failed
+					if (_this.state.pos.y > -215) {
+						_this.setState({
+							draggingY: false,
+							pos: {
+								y: 0
+							},
+							classY: 'pos2',
+							camera: false
+						});
+					}
+					//success
+					else {
+							_this.setState({
+								draggingY: false,
+								pos: {
+									y: -414
+								},
+								classY: 'pos3',
+								camera: true
+							});
+						}
+				}
 
 				e.stopPropagation();
 				e.preventDefault();
+			}, _this.login = function () {
+				_this.setState({ loggedIn: true });
+			}, _this.cancel = function () {
+				_this.setState({
+					draggingX: false,
+					pos: {
+						x: -233
+					},
+					class: 'pos0',
+					lock: false
+				});
 			}, _this.render = function () {
 				return _react2.default.createElement(
 					'div',
-					{ id: 'lockscreen' },
-					_react2.default.createElement(_Statusbar2.default, null),
-					_react2.default.createElement(
+					{ style: { 'top': _this.state.pos.y }, id: _this.state.classY, className: 'lockscreen' },
+					_this.state.loggedIn ? _react2.default.createElement(
 						'div',
-						{ className: 'draggable-container',
-							onMouseDown: _this.handleDown,
-							style: { 'left': _this.state.pos.x },
-							id: _this.state.class },
+						{ id: 'home' },
+						' '
+					) : _react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(_Statusbar2.default, null),
 						_react2.default.createElement(
 							'div',
-							{ className: 'passwordscreen' },
-							_react2.default.createElement(_Lock2.default, null)
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'lockscreen' },
-							_react2.default.createElement(_ContentContainer2.default, null),
-							_react2.default.createElement(_Slider2.default, null)
+							{ className: 'draggable-container',
+								onMouseDown: _this.handleDownX,
+								style: { 'left': _this.state.pos.x },
+								id: _this.state.class
+							},
+							_react2.default.createElement(
+								'div',
+								{ className: 'passwordscreen' },
+								_react2.default.createElement(_Lock2.default, { reset: !_this.state.lock, cancel: _this.cancel, login: _this.login })
+							),
+							_react2.default.createElement(
+								'div',
+								{ className: '_lockscreen' },
+								_react2.default.createElement(_ContentContainer2.default, null),
+								_react2.default.createElement(_Slider2.default, { onDown: _this.handleDownY })
+							)
 						)
 					)
 				);
 			}, _temp), _possibleConstructorReturn(_this, _ret);
 		}
+		/* non-dragging related functions */
+
 
 		return Lockscreen;
 	}(_react.Component);
@@ -29332,16 +29405,32 @@
 				row2: [false, false, false],
 				row3: [false, false, false],
 				row4: false
+			}, _this.componentWillReceiveProps = function (newProps) {
+				//console.log(newProps.reset)
+				if (_this.props.reset) {
+					_this.setState({
+						row1: [false, false, false],
+						row2: [false, false, false],
+						row3: [false, false, false],
+						row4: false
+					});
+				}
 			}, _this.delete = function () {
 				var arr = _this.state.filled;
-				for (var i = arr.length - 1; i >= 0; i--) {
-					if (arr[i] == true) {
-						arr[i] = false;
-						break;
+				//cancel to return to lockscreen w music
+				if (_this.count == 0) {
+
+					_this.props.cancel();
+				} else {
+					for (var i = arr.length - 1; i >= 0; i--) {
+						if (arr[i] == true) {
+							arr[i] = false;
+							break;
+						}
 					}
+					_this.count--;
+					_this.setState({ filled: arr });
 				}
-				_this.count--;
-				_this.setState({ filled: arr });
 			}, _this.mouseUp = function (id) {
 				_this.toggleFill(id);
 				_this.setState({ filled: _this.state.filled.map(function (bool, index) {
@@ -29368,7 +29457,7 @@
 							return _react2.default.createElement(
 								"svg",
 								{ className: "lock-circle", key: index, height: "10", width: "10" },
-								_react2.default.createElement("circle", { cx: "5", cy: "5", r: "4", stroke: "#3399ff", strokeWidth: "1", fill: fill ? "#3399ff" : "none" })
+								_react2.default.createElement("circle", { cx: "5", cy: "5", r: "4", stroke: "#6EDBFF", strokeWidth: "1", fill: fill ? "#6EDBFF" : "none" })
 							);
 						})
 					),
@@ -29386,7 +29475,7 @@
 										}, onMouseUp: function onMouseUp() {
 											return _this.mouseUp(index + 1);
 										}, className: "lock-circle", height: "50", width: "50" },
-									_react2.default.createElement("circle", { cx: "25", cy: "25", r: "25", stroke: "#3399ff", strokeWidth: "1", fill: fill ? "#3399ff" : "none" }),
+									_react2.default.createElement("circle", { cx: "25", cy: "25", r: "25", stroke: "#6EDBFF", strokeWidth: "1", fill: fill ? "#6EDBFF" : "none" }),
 									_react2.default.createElement(
 										"text",
 										{ x: "50%", y: "50%", textAnchor: "middle", stroke: "#fafafa", strokeWidth: "1px", dy: ".3em" },
@@ -29408,7 +29497,7 @@
 										}, onMouseUp: function onMouseUp() {
 											return _this.mouseUp(index + 4);
 										}, className: "lock-circle", height: "50", width: "50" },
-									_react2.default.createElement("circle", { cx: "25", cy: "25", r: "25", stroke: "#3399ff", strokeWidth: "1", fill: fill ? "#3399ff" : "none" }),
+									_react2.default.createElement("circle", { cx: "25", cy: "25", r: "25", stroke: "#6EDBFF", strokeWidth: "1", fill: fill ? "#6EDBFF" : "none" }),
 									_react2.default.createElement(
 										"text",
 										{ x: "50%", y: "50%", textAnchor: "middle", stroke: "#fafafa", strokeWidth: "1px", dy: ".3em" },
@@ -29430,7 +29519,7 @@
 										}, onMouseUp: function onMouseUp() {
 											return _this.mouseUp(index + 7);
 										}, className: "lock-circle", height: "50", width: "50" },
-									_react2.default.createElement("circle", { cx: "25", cy: "25", r: "25", stroke: "#3399ff", strokeWidth: "1", fill: fill ? "#3399ff" : "none" }),
+									_react2.default.createElement("circle", { cx: "25", cy: "25", r: "25", stroke: "#6EDBFF", strokeWidth: "1", fill: fill ? "#6EDBFF" : "none" }),
 									_react2.default.createElement(
 										"text",
 										{ x: "50%", y: "50%", textAnchor: "middle", stroke: "#fafafa", strokeWidth: "1px", dy: ".3em" },
@@ -29451,7 +29540,7 @@
 									}, onMouseUp: function onMouseUp() {
 										return _this.mouseUp(0);
 									}, className: "lock-circle", height: "50", width: "50" },
-								_react2.default.createElement("circle", { cx: "25", cy: "25", r: "25", stroke: "#3399ff", strokeWidth: "1", fill: _this.state.row4 ? "#3399ff" : "none" }),
+								_react2.default.createElement("circle", { cx: "25", cy: "25", r: "25", stroke: "#6EDBFF", strokeWidth: "1", fill: _this.state.row4 ? "#6EDBFF" : "none" }),
 								_react2.default.createElement(
 									"text",
 									{ x: "50%", y: "50%", textAnchor: "middle", stroke: "#fafafa", strokeWidth: "1px", dy: ".3em" },
@@ -29483,7 +29572,8 @@
 
 		_createClass(Lock, [{
 			key: "mouseDown",
-			value: function mouseDown(id) {
+			value: function mouseDown(id, e) {
+				console.log(e);
 				this.toggleFill(id);
 			}
 		}, {
@@ -29748,7 +29838,7 @@
 						_this.state.play ? _react2.default.createElement('img', { onClick: _this.togglePlay, id: 'control-icon', height: '30px', src: 'img/pause.png' }) : _react2.default.createElement('img', { onClick: _this.togglePlay, id: 'control-icon', height: '30px', src: 'img/play.png' }),
 						_react2.default.createElement('img', { onClick: _this.next, id: 'control-icon', height: '30px', src: 'img/forward.png' })
 					),
-					_react2.default.createElement(_ArtworkContainer2.default, { trigger: _this.state.trigger })
+					_react2.default.createElement(_ArtworkContainer2.default, { curr: _this.state.currentTrack, trigger: _this.state.trigger })
 				);
 			}, _temp), _possibleConstructorReturn(_this, _ret);
 		}
@@ -36370,16 +36460,21 @@
 			}
 
 			return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(ArtworkContainer)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
-				img: "https://source.unsplash.com/random/200x200",
-				_img: "https://source.unsplash.com/random/199x199"
+				img0: "https://source.unsplash.com/random/200x200",
+				img1: "https://source.unsplash.com/random/200x201",
+				img2: "https://source.unsplash.com/random/201x200",
+				img3: "https://source.unsplash.com/random/201x201"
 			}, _this.render = function () {
 				return _react2.default.createElement(
 					"div",
 					{ className: "artwork-container" },
 					_react2.default.createElement(
 						"div",
-						{ className: "artwork" },
-						_react2.default.createElement("img", { src: _this.props.trigger ? _this.state.img : _this.state._img })
+						{ className: "artwork card" },
+						_react2.default.createElement("img", { className: "album-cover", id: _this.props.curr == 0 ? 'current-album-cover' : '', src: _this.state.img0 }),
+						_react2.default.createElement("img", { className: "album-cover", id: _this.props.curr == 1 ? 'current-album-cover' : '', src: _this.state.img1 }),
+						_react2.default.createElement("img", { className: "album-cover", id: _this.props.curr == 2 ? 'current-album-cover' : '', src: _this.state.img2 }),
+						_react2.default.createElement("img", { className: "album-cover", id: _this.props.curr == 3 ? 'current-album-cover' : '', src: _this.state.img3 })
 					)
 				);
 			}, _temp), _possibleConstructorReturn(_this, _ret);
@@ -36430,7 +36525,12 @@
 				return _react2.default.createElement(
 					"div",
 					{ id: "slider" },
-					"  > slide to unlock "
+					_react2.default.createElement(
+						"div",
+						null,
+						" > slide to unlock "
+					),
+					_react2.default.createElement("img", { onMouseDown: _this.props.onDown, id: "camera-icon", height: "20px", src: "../img/camera-icon.png" })
 				);
 			}, _temp), _possibleConstructorReturn(_this, _ret);
 		}

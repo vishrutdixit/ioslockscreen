@@ -9,16 +9,34 @@ class Lock extends Component {
 		row3: [false, false, false],
 		row4: false
 	}
+	componentWillReceiveProps = (newProps) => {
+		//console.log(newProps.reset)
+		if(this.props.reset){
+			this.setState({
+				row1:[false, false, false],
+				row2:[false, false, false],
+				row3:[false, false, false],
+				row4:false
+			})
+		}
+	}
 	delete = () => {
 		let arr = this.state.filled
-		for(let i = arr.length-1; i >= 0; i--){
-			if (arr[i]==true) {
-				arr[i]=false
-				break
-			}
+		//cancel to return to lockscreen w music
+		if(this.count == 0) {
+			
+			this.props.cancel()
 		}
-		this.count--;
-		this.setState({filled: arr})
+		else {
+			for(let i = arr.length-1; i >= 0; i--){
+				if (arr[i]==true) {
+					arr[i]=false
+					break
+				}
+			}
+			this.count--;
+			this.setState({filled: arr})
+		}
 	}
 	mouseUp = (id) => {
 		this.toggleFill(id);
@@ -34,7 +52,8 @@ class Lock extends Component {
 			this.props.login();
 		}
 	}
-	mouseDown(id) {
+	mouseDown(id, e) {
+		console.log(e)
 		this.toggleFill(id);
 	}
 	toggleFill(id) {
@@ -73,7 +92,7 @@ class Lock extends Component {
 				{ this.state.filled.map((fill, index)=>{
 					return(
 					<svg className="lock-circle" key={index} height="10" width="10">
-	  			<circle cx="5" cy="5" r="4" stroke="#3399ff" strokeWidth="1" fill={ fill ? "#3399ff" : "none" } />
+	  			<circle cx="5" cy="5" r="4" stroke="#6EDBFF" strokeWidth="1" fill={ fill ? "#6EDBFF" : "none" } />
 					</svg>
 					)
 				})}
@@ -83,7 +102,7 @@ class Lock extends Component {
 				{this.state.row1.map((fill, index)=>{
 					return (
 					<svg key={index+1} onMouseDown={() => this.mouseDown(index+1)} onMouseUp={() => this.mouseUp(index+1)} className="lock-circle" height="50" width="50">
-	  			<circle cx="25" cy="25" r="25" stroke="#3399ff" strokeWidth="1" fill={ fill ? "#3399ff" : "none" }  />
+	  			<circle cx="25" cy="25" r="25" stroke="#6EDBFF" strokeWidth="1" fill={ fill ? "#6EDBFF" : "none" }  />
 	  			<text x="50%" y="50%" textAnchor="middle" stroke="#fafafa" strokeWidth="1px" dy=".3em"> { index+1 } </text>
 					</svg>
 					)
@@ -93,7 +112,7 @@ class Lock extends Component {
 				{this.state.row2.map((fill, index)=>{
 					return (
 					<svg key={index+4} onMouseDown={() => this.mouseDown(index+4)} onMouseUp={() => this.mouseUp(index+4)} className="lock-circle" height="50" width="50">
-	  			<circle cx="25" cy="25" r="25" stroke="#3399ff" strokeWidth="1" fill={ fill ? "#3399ff" : "none" }  />
+	  			<circle cx="25" cy="25" r="25" stroke="#6EDBFF" strokeWidth="1" fill={ fill ? "#6EDBFF" : "none" }  />
 	  			<text x="50%" y="50%" textAnchor="middle" stroke="#fafafa" strokeWidth="1px" dy=".3em"> { index+4 } </text>
 					</svg>
 					)
@@ -103,7 +122,7 @@ class Lock extends Component {
 				{this.state.row3.map((fill, index)=>{
 					return (
 					<svg key={index+7} onMouseDown={() => this.mouseDown(index+7)} onMouseUp={() => this.mouseUp(index+7)} className="lock-circle" height="50" width="50">
-	  			<circle cx="25" cy="25" r="25" stroke="#3399ff" strokeWidth="1" fill={ fill ? "#3399ff" : "none" }  />
+	  			<circle cx="25" cy="25" r="25" stroke="#6EDBFF" strokeWidth="1" fill={ fill ? "#6EDBFF" : "none" }  />
 	  			<text x="50%" y="50%" textAnchor="middle" stroke="#fafafa" strokeWidth="1px" dy=".3em"> { index+7 } </text>
 					</svg>
 					)
@@ -111,7 +130,7 @@ class Lock extends Component {
 			</div>
 			<div>
 				<svg key={0} onMouseDown={() => this.mouseDown(0)} onMouseUp={() => this.mouseUp(0)} className="lock-circle" height="50" width="50">
-	  		<circle cx="25" cy="25" r="25" stroke="#3399ff" strokeWidth="1" fill={ this.state.row4 ? "#3399ff" : "none" }  />
+	  		<circle cx="25" cy="25" r="25" stroke="#6EDBFF" strokeWidth="1" fill={ this.state.row4 ? "#6EDBFF" : "none" }  />
 	  		<text x="50%" y="50%" textAnchor="middle" stroke="#fafafa" strokeWidth="1px" dy=".3em"> 0 </text>
 				</svg>
 			</div>
