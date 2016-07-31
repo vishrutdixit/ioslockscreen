@@ -18,6 +18,7 @@
   "homepage": "https://github.com/vishrutdixit/ioslockscreen#readme",
   "dependencies": {
     "jquery": "^3.1.0",
+    "rc-slider": "^3.8.2",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
     "react-draggable": "^2.1.2",

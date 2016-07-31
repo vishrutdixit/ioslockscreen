@@ -3,10 +3,10 @@ import React, { Component } from 'react'
 
 class ArtworkContainer extends Component {
 	state = {
-		img0: "https://source.unsplash.com/random/200x200",
+		img0: "https://source.unsplash.com/random/201x201",
 		img1: "https://source.unsplash.com/random/200x201",
 		img2: "https://source.unsplash.com/random/201x200",
-		img3: "https://source.unsplash.com/random/201x201"
+		img3: "https://source.unsplash.com/random/200x200"
 	}
 	render = () => {
 		return (

@@ -13,6 +13,7 @@ class Lock extends Component {
 		//console.log(newProps.reset)
 		if(this.props.reset){
 			this.setState({
+				filled: [false, false, false, false],
 				row1:[false, false, false],
 				row2:[false, false, false],
 				row3:[false, false, false],

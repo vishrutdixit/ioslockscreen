@@ -60,9 +60,9 @@ body {
 
 #progress-bar {
 	width: 150px;
-	height:3px;
-	background-color: black;
-	opacity: 0.5;
+	height:2px;
+	background-color: #BCD4D2;
+	opacity: 0.7;
 	margin: 0 auto;
 }
 
@@ -73,9 +73,25 @@ body {
 }
 .track-name {
 	color: white;
-	font-size: 14pt;
+	font-size: 13pt;
 }
 
+.volume-icon {
+	position: relative;
+	top: 5px;
+	display: inline-block;
+	padding: 0 5px;
+}
+
+#v-slider {
+	display: inline-block;
+	width: 150px;
+}
+
+#volume-slider {
+	width: 195px;
+	margin: 0 auto;
+}
 .track-artist {
 	color: black;
 	font-size: 8pt;
@@ -84,16 +100,15 @@ body {
 #music-controls {
 	padding-top: 10px;
 	padding-left: 58px;
-	padding-bottom: 40px;
+	padding-bottom: 8px;
 }
 
 #control-icon {
-	margin: 0 5px;
+	margin: 0 8px;
 }
 
 #camera-icon {
 	position: relative;
-	top: 2px;
 	right: 3px;
 	float: right;
 }
@@ -148,23 +163,6 @@ body {
 	color: white;
 }
 
-#clock {
-	position: relative;
-	opacity: 1;
-	height: 100%;
-	color: #fafafa;
-	text-align: center;
-}
-
-#time {
-	font-size: 45pt;
-	line-height: 60px;
-}
-
-#date {
-	font-size: 10pt;
-}
-
 .content-container {
 	padding-top: 20px;
 	height: 100px;
@@ -180,6 +178,7 @@ body {
 }
 
 .artwork {
+	margin-top: 40px;
 	height: 200px;
 	width: 200px;
 	position: relative;
@@ -189,7 +188,7 @@ body {
 }
 
 #slider {
-	margin-top: 230px;
+	margin-top: 235px;
 	text-align: center;
 }
 
@@ -260,7 +259,7 @@ body {
 }
 
 .numpad-controls {
-	padding-top:10px;
+	padding-top:25px;
 }
 
 .numpad {
