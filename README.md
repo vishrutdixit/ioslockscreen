@@ -6,7 +6,7 @@
 
 ------
 
-changes:
+Changes:
 -camera
 -preload images
 -smooth slide animation
