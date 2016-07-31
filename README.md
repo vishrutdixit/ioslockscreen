@@ -12,3 +12,7 @@ Changes:
 -smooth slide animation
 -music volume
 -lockscreen cancel button
+
+------
+
+![alt tag](https://raw.githubusercontent.com/vishrutdixit/ioslockscreen/master/ioslockscreen.gif)
