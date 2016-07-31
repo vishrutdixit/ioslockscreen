@@ -15,4 +15,4 @@ Changes:
 
 ------
 
-Absolute README link](https://github.com/vishrutdixit/ioslockscreen/blob/master/ioslockscreen.gif)
+[Absolute README link](https://github.com/vishrutdixit/ioslockscreen/blob/master/ioslockscreen.gif)
