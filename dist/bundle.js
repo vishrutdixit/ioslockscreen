@@ -21103,7 +21103,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	  value: true
 	});
 
 	var _react = __webpack_require__(1);
@@ -21118,10 +21118,6 @@
 
 	var _Screen2 = _interopRequireDefault(_Screen);
 
-	var _jquery = __webpack_require__(269);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21131,117 +21127,33 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var App = function (_Component) {
-		_inherits(App, _Component);
+	  _inherits(App, _Component);
 
-		function App() {
-			var _Object$getPrototypeO;
+	  function App() {
+	    var _Object$getPrototypeO;
 
-			var _temp, _this, _ret;
+	    var _temp, _this, _ret;
 
-			_classCallCheck(this, App);
+	    _classCallCheck(this, App);
 
-			for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-				args[_key] = arguments[_key];
-			}
-
-			return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(App)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.render = function () {
-				return (
-					/*
-	      <div className="drag-test"
-	      		onMouseDown={this.handleDown}
-	          style={{'top': this.state.pos.y, 'left': this.state.pos.x}}
-	          id={this.state.class}>
-	    
-	      </div>
-	      */
-
-					_react2.default.createElement(
-						'div',
-						{ id: 'frame' },
-						_react2.default.createElement('img', { height: '600px', width: '307.15', src: 'img/frame.png' }),
-						_react2.default.createElement(_Screen2.default, null)
-					)
-				);
-			}, _temp), _possibleConstructorReturn(_this, _ret);
-		}
-		/*
-	 state = {
-	 	dragging: false,
-	 	pos: {x:50, y:0},
-	 	rel: null,
-	 	class: null
-	 }
-	 componentDidUpdate = (props, state) => {
-	    if (this.state.dragging && !state.dragging) {
-	      document.addEventListener('mousemove', this.handleDrag)
-	      document.addEventListener('mouseup', this.handleUp)
-	    } else if (!this.state.dragging && state.dragging) {
-	      document.removeEventListener('mousemove', this.handleDrag)
-	      document.removeEventListener('mouseup', this.handleUp)
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+	      args[_key] = arguments[_key];
 	    }
-	  }
-	 handleDown = (e) => {
-	 	//console.log(e)
-	 	if (e.button !== 0) return
-	 	let pos = $(".drag-test").offset()
-	 	this.setState({
-	 		dragging:true,
-	 		rel: {
-	        x: e.pageX - pos.left,
-	        y: e.pageY - pos.top
-	      },
-	      class:null
-	 	})
-	 	e.stopPropagation()
-	    e.preventDefault()
-	 }
-	 handleDrag = (e) => {
-	 	if (!this.state.dragging) return
-	    this.setState({
-	      pos: {
-	        x: e.pageX - this.state.rel.x,
-	        y: 0
-	      }
-	    })
-	     e.stopPropagation()
-	    e.preventDefault()
-	 }
-	 handleUp = (e) => {
-	 	//failed
-	 	if(this.state.pos.x < 250){
-	 		this.setState({
-	 			dragging:false,
-	 			pos: {
-	 				x:0,
-	 				y:0
-	 			},
-	 			class: 'pos0'
-	 		})
-	 	}
-	 	else {
-	 		this.setState({
-	 			dragging:false,
-	 			pos: {
-	 				x:500,
-	 				y:0
-	 			},
-	 			class: 'pos1'
-	 		})
-	 	}
-	 	e.stopPropagation()
-	    e.preventDefault()
-	 }
-	 */
 
-		return App;
+	    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(App)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.render = function () {
+	      return _react2.default.createElement(
+	        'div',
+	        { id: 'frame' },
+	        _react2.default.createElement('img', { height: '600px', width: '307.15', src: 'img/frame.png' }),
+	        _react2.default.createElement(_Screen2.default, null)
+	      );
+	    }, _temp), _possibleConstructorReturn(_this, _ret);
+	  }
+
+	  return App;
 	}(_react.Component);
 
 	exports.default = App;
-
-	/*
-
-
-	*/
 
 /***/ },
 /* 173 */
@@ -21315,14 +21227,6 @@
 	}(_react.Component);
 
 	exports.default = Screen;
-
-	/*
-	screen
-	|--notification bar
-	|--lockscreen
-	|--camera
-
-	*/
 
 /***/ },
 /* 174 */
@@ -29620,10 +29524,6 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _Clock = __webpack_require__(262);
-
-	var _Clock2 = _interopRequireDefault(_Clock);
-
 	var _Music = __webpack_require__(263);
 
 	var _Music2 = _interopRequireDefault(_Music);
@@ -29665,65 +29565,7 @@
 	exports.default = ContentContainer;
 
 /***/ },
-/* 262 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Clock = function (_Component) {
-		_inherits(Clock, _Component);
-
-		function Clock() {
-			var _Object$getPrototypeO;
-
-			var _temp, _this, _ret;
-
-			_classCallCheck(this, Clock);
-
-			for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-				args[_key] = arguments[_key];
-			}
-
-			return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_Object$getPrototypeO = Object.getPrototypeOf(Clock)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.render = function () {
-				return _react2.default.createElement(
-					"div",
-					{ id: "clock" },
-					_react2.default.createElement(
-						"div",
-						{ id: "time" },
-						" 8:20 "
-					),
-					_react2.default.createElement(
-						"div",
-						{ id: "date" },
-						" Saturday, July 23 "
-					)
-				);
-			}, _temp), _possibleConstructorReturn(_this, _ret);
-		}
-
-		return Clock;
-	}(_react.Component);
-
-	exports.default = Clock;
-
-/***/ },
+/* 262 */,
 /* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -36499,6 +36341,8 @@
 				);
 			}, _temp), _possibleConstructorReturn(_this, _ret);
 		}
+		//little janky, using different sizes to preload
+
 
 		return ArtworkContainer;
 	}(_react.Component);

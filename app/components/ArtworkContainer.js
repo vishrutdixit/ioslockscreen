@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
-
 class ArtworkContainer extends Component {
+	//little janky, using different sizes to preload
 	state = {
 		img0: "https://source.unsplash.com/random/201x201",
 		img1: "https://source.unsplash.com/random/200x201",

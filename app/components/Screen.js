@@ -5,8 +5,6 @@ import Lockscreen from './Lockscreen'
 import ContentContainer from './ContentContainer'
 import Slider from "./Slider"
 
-
-
 class Screen extends Component {
 	
 	render = () => {
@@ -21,10 +19,3 @@ class Screen extends Component {
 
 export default Screen
 
-/*
-screen
-|--notification bar
-|--lockscreen
-|--camera
-
-*/
